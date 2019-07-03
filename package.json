@@ -36,28 +36,10 @@
       "env"
     ]
   },
-  "h5bp-configs": {
-    "directories": {
-      "archive": "archive",
-      "dist": "dist",
-      "src": "src",
-      "test": "test"
-    }
-  },
   "license": "MIT",
   "scripts": {
     "start": "node ./src/js/server.js"
   },
-  "version": "7.2.0",
-  "description": "A professional front-end template for building fast, robust, and adaptable web apps or sites.",
-  "files": [
-    "CHANGELOG.md",
-    "LICENSE.txt",
-    "package.json",
-    "dist/",
-    "modernizr-config.json",
-    "README.md"
-  ],
   "main": ".eslintrc.js",
   "directories": {
     "test": "test"
