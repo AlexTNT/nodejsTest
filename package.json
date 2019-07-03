@@ -38,7 +38,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "start": "node ./src/js/server.js"
+    "start": "node src/js/server.js"
   },
   "main": ".eslintrc.js",
   "directories": {
