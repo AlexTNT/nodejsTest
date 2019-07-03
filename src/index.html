@@ -1,0 +1,166 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title>TESTIO</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="main.css">
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+  <!--[if IE]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please
+      <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.
+    </p>
+  <![endif]-->
+
+  <!-- Add your site or application content here -->
+  <div id="app" style="display: flex; flex-direction: row; flex-wrap: wrap"></div>
+
+
+  <script src="js/plugins.js"></script>
+  <script src="main.js"></script>
+  <script>
+    "use strict";
+
+    const inputTypeEnum = Object.freeze({
+      manually: 'Пользовательский',
+      selectable: "Список значений"
+    });
+
+
+    function checkString(value) {
+        return typeof value === 'string';
+    }
+
+    function checkEnumValue(value) {
+        return value === inputTypeEnum.manually || value === inputTypeEnum.selectable;
+    }
+
+    function checkTypeDecorator(func, checkCallbacks){
+        return function() {
+            const args = [].slice.call(arguments);
+            args.forEach((item, i) => {
+                if(!checkCallbacks[i](item)){
+                    console.warn('incorrect argument type ' + item);
+                    args[i] = 'Стандарт'
+                }
+            });
+            return func.apply(this, args)
+        }
+    }
+
+
+
+
+
+    /**
+     * Класс компонент
+     * @class Component
+     * @param nodeName
+     * @constructor
+     */
+    function Component(nodeName) {
+        this._parentNode = document.querySelectorAll('#' + nodeName)[0];
+
+        this.render = function(cb){
+            const container = document.createElement('div');
+            container.classList.add('component__container');
+
+            const inner = document.createElement('div');
+            inner.classList.add('component__body');
+            inner.innerHTML = cb();
+
+            container.appendChild(inner);
+            this._parentNode.appendChild(container)        }
+    }
+
+
+    /**
+     * Класс группа построен в функциональном стиле
+     * @extends Component
+     * @param {string} name - наименование группы
+     * @param {string} type - тип группы
+     * @param {HTMLElement} parentNode - родительский элемент
+     * @constructor
+     */
+    function Group (name, type, parentNode) {
+        Component.call(this, parentNode);
+
+        Group.count ++;
+        const index = Group.count;
+        const groupName = name;
+        const groupType = (type === inputTypeEnum.selectable) ? inputTypeEnum.selectable : inputTypeEnum.manually;
+        this.toString = function () {
+          return groupName + ' ' + groupType ;
+        };
+
+        Object.defineProperty(this, 'name', {
+          get: function() {
+              return groupName + ' ' + index
+          }
+        });
+        Object.defineProperty(this, 'toString', {enumerable: false});
+
+        this.render( () => {
+            return groupName + ' ' + index + ' => ' + groupType;
+          }
+        );
+    }
+    Group.count = 0;
+    Group.createNamedGroup = checkTypeDecorator(Group.createNamedGroup, [checkString, checkEnumValue]);
+    Group.createDefaultGroup = function() {
+      return new Group('Группа', false, 'app');
+    };
+    Group.createNamedGroup = function (name, type) {
+      return new Group(name, type, 'app')
+    };
+
+
+
+    let arr = [];
+    arr.push( Group.createDefaultGroup() );
+    arr.push( Group.createNamedGroup('ИПР', inputTypeEnum.selectable) );
+    arr.push( Group.createNamedGroup(112223, inputTypeEnum.selectable) );
+    arr.push( Group.createNamedGroup('ИПР2', inputTypeEnum.selectable) );
+    arr.push( Group.createDefaultGroup() );
+    arr.push( Group.createDefaultGroup() );
+    arr.push( Group.createDefaultGroup() );
+
+    arr.forEach((item) => {
+        console.log(item);
+    });
+
+
+    function validateBraces(str) {
+      console.log(1);
+      if( !str ) return false;
+
+      const bracesTypes = ['{','(','[',']',')','}'];
+      var result = [];
+      var openBraces = '', closeBraces = '';
+      for(var i=0, j=bracesTypes.length-1; i < (bracesTypes.length/2); i++, j--) {
+        openBraces = str.split(bracesTypes[i]).length-1;
+        closeBraces = str.split(bracesTypes[j]).length-1;
+        console.log(openBraces + ' ' + closeBraces);
+        result.push( openBraces === closeBraces );
+      }
+      console.log(result);
+      var s = result.every(function(item){
+        return item === true
+      });
+      console.log(s);
+    }
+  </script>
+</body>
+
+</html>
