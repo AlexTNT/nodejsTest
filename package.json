@@ -48,9 +48,7 @@
   "license": "MIT",
   "name": "html5-boilerplate",
   "scripts": {
-    "start": "node ./src/js/server.js",
-    "build": "gulp build",
-    "test": "gulp archive && mocha --require babel-core/register --reporter spec --timeout 5000"
+    "start": "node ./src/js/server.js"
   },
   "version": "7.2.0",
   "description": "A professional front-end template for building fast, robust, and adaptable web apps or sites.",
