@@ -1,49 +1,19 @@
 {
-  "devDependencies": {
-    "apache-server-configs": "^3.2.1",
-    "archiver": "^3.0.0",
-    "babel-core": "^6.26.3",
-    "babel-preset-env": "^1.7.0",
-    "babel-register": "^6.26.0",
-    "del": "^4.1.1",
-    "eslint": "^5.16.0",
-    "eslint-config-recommended": "^4.0.0",
-    "eslint-plugin-mocha": "^5.3.0",
-    "glob": "^7.1.4",
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^6.1.0",
-    "gulp-eslint": "^5.0.0",
-    "gulp-header": "^2.0.7",
-    "gulp-jscs": "^4.1.0",
-    "gulp-load-plugins": "^1.6.0",
-    "gulp-rename": "^1.4.0",
-    "gulp-replace": "^1.0.0",
-    "jquery": "3.4.1",
-    "main.css": "2.0.0",
-    "mocha": "^5.2.0",
-    "modernizr": "3.7.1",
-    "normalize.css": "8.0.1",
-    "run-sequence": "^2.2.1",
-    "ssri": "^6.0.1",
-    "strip-json-comments": "^2.0.1"
-  },
-  "engines": {
-    "node": ">=6",
-    "npm": ">=3"
-  },
-  "babel": {
-    "presets": [
-      "env"
-    ]
-  },
-  "license": "MIT",
+  "name": "nodejstest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "js/server.js",
   "scripts": {
-    "start": "node src/js/server.js"
+    "start": "node js/server.js"
   },
-  "main": ".eslintrc.js",
-  "directories": {
-    "test": "test"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexTNT/nodejsTest.git"
   },
-  "keywords": [],
-  "author": ""
+  "author": "AlexTNT",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexTNT/nodejsTest/issues"
+  },
+  "homepage": "https://github.com/AlexTNT/nodejsTest#readme"
 }
