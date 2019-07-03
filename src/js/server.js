@@ -23,7 +23,8 @@ const server = http.createServer(function(request, response){
     response.end(error);
 
   } else {
-    response.end('');
+    const html = fs.readFileSync('../index.html', 'utf8');
+    response.end(html);
   }
 });
 
